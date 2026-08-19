@@ -1,0 +1,22 @@
+# TeX, snapshot, and latexmk generated files
+*.aux
+*.dep
+*.fdb_latexmk
+*.log
+*.out
+*.synctex.gz
+*.log
+*.fls
+
+# Bibliography auxiliary files (bibtex/biblatex/biber):
+*.bbl
+*.bbl-SAVE-ERROR
+*.bcf
+*.bcf-SAVE-ERROR
+*.blg
+*-blx.aux
+*-blx.bib
+*.run.xml
+
+*.png
+*.jpg

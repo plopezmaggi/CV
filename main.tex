@@ -1,0 +1,253 @@
+\documentclass[12pt,a4paper,sans]{moderncv}
+
+\usepackage[symbol*]{footmisc} % enabling footnotes.
+\setfnsymbol{wiley}
+
+% moderncv themes
+\moderncvstyle{classic}
+
+% Para justificar texto en la carta
+\usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
+\makeatletter
+\patchcmd{\makeletterhead}% <cmd>
+  {\raggedright \@opening}% <search>
+  {\@opening}% <replace>
+  {}{}% <success><failure>
+\makeatother
+
+% \usepackage{hyperref}
+\usepackage{xcolor}
+
+\moderncvcolor{burgundy}
+\definecolor{mypink}{RGB}{128, 0, 32}
+
+% adjust the page margins
+\usepackage[left=.7in, right=.7in, top=.7in, bottom=.5in]{geometry}
+\setlength{\footskip}{136.00005pt}
+
+\setlength{\hintscolumnwidth}{2.4cm}
+
+% \setlength{\makecvheadnamewidth}{9cm}            % for the 'classic' style, if you want to force the width allocated to your name and avoid line breaks. be careful though, the length is normally calculated to avoid any overlap with your personal info; use this at your own typographical risks...
+
+% font loading
+% for luatex and xetex, do not use inputenc and fontenc
+% see https://tex.stackexchange.com/a/496643
+\ifxetexorluatex
+  \usepackage{fontspec}
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX}
+  \setmainfont{Latin Modern Roman}
+  \setsansfont{Latin Modern Sans}
+  \setmonofont{Latin Modern Mono}
+  \setmathfont{Latin Modern Math} 
+\else
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+\fi
+
+% document language
+\usepackage[english]{babel}
+
+% personal data
+\name{\vspace{30pt}Pilar}{López Maggi}
+\address{Belgrano 285 4B}{Ramos Mejía 1704, Buenos Aires}{Argentina}
+
+\phone[mobile]{+54 (911) 3013-5040}
+
+\email{pilar.lopezmaggi@gmail.com}
+
+% \social[github]{plopezmaggi}
+
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{naturalnames}{hyperref}
+
+\extrainfo{Birthdate: December 11, 2001}
+
+\usepackage{xpatch}
+% \patchcmd{\makecvhead}%
+%    {width=\@photowidth}%
+%    {width=\@photowidth,angle=270}%
+%    {}{}
+
+% \photo[64pt][0pt]{photo.png}
+\let\thempfootnote\thefootnote
+
+% Publicaciones
+% \renewcommand*{\bibliographyitemlabel}{[\arabic{enumiv}]}
+% \renewcommand{\refname}{Publications}
+\usepackage[backend=biber,style=authoryear,sorting=none,dashed=false]{biblatex}
+\addbibresource{publications.bib}
+
+\renewbibmacro*{date}{%
+  \printfield{year}%
+}
+\renewbibmacro*{date+extrayear}{}
+\renewbibmacro*{issue+date}{}
+\newcommand*{\bibyear}{}
+
+\AtEveryBibitem{\clearfield{month}\clearfield{endmonth}}
+
+\DeclareSortingTemplate{ydmnt}{
+  \sort{
+    \field{presort}
+  }
+  \sort[final]{
+    \field{sortkey}
+  }
+  \sort[direction=descending]{
+    \field{sortyear}
+    \field{year}
+  }
+  \sort[direction=descending]{
+    \field{month}
+  }
+  \sort{
+    \field{sortname}
+    \field{author}
+    \field{editor}
+    \field{translator}
+    \field{sorttitle}
+    \field{title}
+  }
+}
+
+\ExecuteBibliographyOptions{sorting=ydmnt}
+
+\defbibenvironment{bibliography}
+  {\list
+     {\iffieldequals{year}{\bibyear}
+        {}
+        {\printfield{year}%
+         \savefield{year}{\bibyear}}}
+     {\setlength{\topsep}{0pt}% layout parameters based on moderncvstyleclassic.sty
+      \setlength{\labelwidth}{\hintscolumnwidth}%
+      \setlength{\labelsep}{\separatorcolumnwidth}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \leftmargin\labelwidth%
+      \advance\leftmargin\labelsep}%
+      \sloppy\clubpenalty4000\widowpenalty4000}
+  {\endlist}
+  {\item}
+
+% \def\CC{{C\nolinebreak[4]\hspace{-.05em}\raisebox{.4ex}{\tiny\bf ++}}}
+
+\begin{document}
+
+\makecvtitle
+\vspace{-10pt}
+\section{Education}
+% \cventry{April 2026 -- ongoing}{PhD in Physics}{University of Buenos Aires}{Buenos Aires (Argentina).}{}{} 
+\cventry{March 2020 -- March 2026}{Licenciatura in Physics (Master's-equivalent)}{University of Buenos Aires}{Buenos Aires (Argentina).}{}{\begin{itemize}
+    \item Final grade: 9.82/10. Current average grade for Physics students is 8.94/10.
+\end{itemize}\vspace{10pt}}  % arguments 3 to 6 can be left empty
+% \cventry{year--year}{Degree}{Institution}{City}{\textit{Grade}}{Description}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+% \section{References}
+% \cvlistitem{Prof. Javier Tiffenberg (\url{javiert@fnal.gov}). Fermi National Accelerator Laboratory \& Department of Physics, Faculty of Exact and Natural Sciences, University of Buenos Aires.}
+% \cvlistitem{Dr. Carla Bonifazi (\url{cbonifazi@unsam.edu.ar}). CBPF \& ICIFI-UNSAM.}
+% \cvlistitem{Prof. Dario Rodrigues (\url{rodriguesfm@df.uba.ar}). Department of Physics, Faculty of Exact and Natural Sciences, University of Buenos Aires.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Research experience}
+\cventry{April 2026 -- ongoing}{Research scholarship (Paid)}{Argentinian Laboratory of Low Threshold Detectors and their Applications (LAMBDA).}{}{}{\itemize{
+  \item Upper limit sensitivity estimation for the DarkNESS experiment.
+}}
+\cventry{March 2025 -- March 2026}{Thesis}{Argentinian Laboratory of Low Threshold Detectors and their Applications (LAMBDA). \normalfont Advisor: Javier Tiffenberg. Co--advisor: Dario Rodrigues.}{}{}{\itemize{
+\item Implementation of background event simulations and design of a temperature sensor read--out device for the DarkNESS collaboration, which is developing a nanosatellite to search for dark matter from Low Earth Orbit using Skipper-CCD sensors.
+\item {\color{mypink}\href{https://drive.google.com/file/d/1h9UNeJGQSm26XqrdMYTy9Xi1Ks1_mgut/view}{\underline{Document}}} (in Spanish).
+\item Paper in preparation, to be published in PASP or PRApplied.}}
+
+% \itemize{\item DarkNESS collaboration (development of a nanosatellite to search for dark matter from Low Earth Orbit).}
+
+\cventry{14 July 2025 --\\14 September 2025}{Paid research internship (Swiss Summer Student Particle Physics Program)}{Low Energy Particle Physics -- Fundamental Interactions Group, ETH Zürich.}{}{}{
+\begin{itemize}
+    \item Testing scintillating LYSO crystals for the PIONEER experiment and developing optical simulations.
+    \item Included a {\color{mypink}\href{https://indico.cern.ch/event/1579115/contributions/6654589/attachments/3130227/5553097/pilarLopezMaggi.pdf}{\underline{final talk}}} and {\color{mypink}\href{https://drive.google.com/file/d/158yFIbbvDPSkXvO9gzmfnSpG0ELV4Sb_/view?usp=sharing}{\underline{report}}}.
+\end{itemize}}
+
+\cventry{March 2024 -- December 2024}{Student research project}{Argentinian Laboratory of Low Threshold Detectors and their Applications (LAMBDA). \normalfont {Advisors: Ana Martina Botti and Carla Bonifazi.}}{}{}{\begin{itemize}
+    \item Developing a calibration system for CMOS sensors using homogeneous illumination, implementing a muon detector using these sensors and developing algorithms to identify and process particle events from their images.
+    \item {\color{mypink}\href{https://drive.google.com/file/d/1DCnagytk5ND94ZxhAa-RrUZhxliYTFME/view?usp=sharing}{\underline{Summary}}} (in English) is available.
+    \item This work was published and presented in conferences and peer-reviewed journals as detailed in sections \textit{Publications} and \textit{Conferences}.
+\end{itemize}}
+
+% \addtocategory{pos}{Botti:2025og}\nocite{Botti:2025og}
+% \printbibliography[title={},category=pos]
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Publications}
+
+\cventry{2026}{\normalfont O. Beesley, J. Carlton, D. Ding, S. Foster, K. Frahm, T. Frank, L. Gibbons, D. Goeldi, T. Gorringe, D. W. Hertzog, S. Hochrein, J. Hui, E. Klemets, J. LaBounty, J. Liu, P. López Maggi, et al. ``Energy, time, and position resolution measurements of an array of large tapered LYSO crystals''. In: \href{https://arxiv.org/abs/2607.09226}{arXiv: 2607.09226 \texttt{[physics.ins-det]}. Submitted to JINST.}}{}{}{}{}
+
+\cventry{}{\normalfont P. Alpine, A. M. Botti, B. A. Cervantes-Vergara, C. R. Chavez, F. Chierchie, A. Drlica-Wagner, J. Estrada, E. Etzion, M. Lembeck, P. López Maggi, et al. ``X-ray characterization of fully-depleted p-channel Skipper-CCDs for the DarkNESS mission''. In:~\href{https://arxiv.org/abs/2602.02461}{arXiv: 2602.02461 \texttt{[astro-ph.IM]}}. To be submitted to JINST.}{}{}{}{}
+
+\cventry{2025}{{\normalfont L. Barreiro, S. Benas, C. Bonifazi, A. M. Botti, F. Cammarata, M. Danussi, E. Depaoli, P. López Maggi, et al. (2025). ``Low-Cost CMOS Tech for Inclusive High-Energy Physics Education''. In: \textit{PoS(ICRC2025)}, p. 1239. DOI: \href{https://pos.sissa.it/501/1239/pdf}{10.22323/1.501.1239}.}}{}{}{}{}
+
+\cventry{}{{\normalfont L. Barreiro, F. Cammarata, M. Danussi, P. López Maggi, et al. (2025). \textit{``Determinación de la curva de transferencia de fotones, ruido de lectura y corriente oscura en sensores CMOS'' [``Determination of the photon transfer curve, readout noise and dark current in CMOS sensors'']}. In: \textit{Anales AFA} 36.4, pp. 71–75. doi: \href{https://anales.fisica.org.ar/index.php/analesafa/article/view/2453}{10.31527/analesafa.2025.36.4.71-75.}}}{}{}{}{}
+
+% \nocite{*}
+% \printbibliography[title={Publications}] 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Conferences}
+\cventry{2025}{{\normalfont ``Low-cost CMOS Tech for Inclusive High-Energy Physics Education''. \underline{L. Barreiro}}}{{\normalfont S. Benas, C. Bonifazi, A. M. Botti, F. Cammarata, M. Danussi, E. Depaoli, P. López Maggi, J. Pérez Lanzillotta, D. Rodrigues, G. Schulze, J. Tiffenberg. International Cosmic Ray Conference. Geneva, Switzerland.}}{}{}
+{
+% \begin{itemize}
+%     \item Presentado como charla de división y póster.
+% \end{itemize}\vspace{10pt}
+}
+
+\cventry{2024}{{\normalfont ``Caracterización de sensores CMOS para detección de partículas'' [``Characterization of CMOS sensors for particle detection'']. \underline{F. Cammarata}}}{{\normalfont\underline{P. López Maggi}, A. Botti, C. Bonifazi, D. Rodrigues, J. Tiffenberg. Annual Meeting of the Argentinian Physics Society (AFA). San Luis, Argentina.}}{}{}
+{\begin{itemize}
+  % \footnotetext{These authors contributed equally.}
+    \item Oral presentation (joint-presenter) and poster session.
+\end{itemize}\vspace{10pt}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Teaching}
+\cventry{March 2025 -- ongoing}{Teaching assistant (paid position)}{Physics Department, Faculty of Exact and Natural Sciences, University of Buenos Aires.}{}{}{
+\begin{itemize}
+    \item 2025: Introductory mechanics and electronics labs.
+    \item 2026: Statistical methods in experimental physics.
+\end{itemize}}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Outreach and Service work}
+\cvitem{2023 -- 2025}{Organizer and teacher of Python course aimed at first-year university students in Physics and related disciplines.}
+
+\cvitem{2022 -- 2024}{Speaker and convener in outreach and science popularization events aimed at high school students and the general public.}
+
+\section{Languages}
+\cvlistitem{\textbf{Spanish}: Native.}
+\cvlistitem{\textbf{English}: C1 (Advanced).}
+\cvlistitem{\textbf{Italian}: B1 (Intermediate).}
+
+\section{Courses \& workshops}
+\cventry{2024}{Neuromatch Academy: Deep Learning.}{}{}{}{\begin{itemize}
+    \item Intensive three--week course introducing fundamental Deep Learning concepts and modern architectures.
+\end{itemize}}
+% \cventry{2023}{Brainhack School}{Buenos Aires branch.}{}{}{}
+% \cventry{2022}{CS50's Introduction to Artificial Intelligence with Python.}{}{}{}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Computer skills}
+\cvlistitem{\textbf{Programming languages}: Python, C\texttt{++}, Bash.}
+\cvlistitem{\textbf{Libraries}: ROOT/PyROOT, Geant4, NumPy, Matplotlib, SciPy, PyTorch.}
+\cvlistitem{\textbf{Others}: LaTeX, Git \& GitHub, KiCad, 3D design.}
+
+% \includegraphics[width=0.15\linewidth]{firmaNegraSinAclaracion.png}
+
+
+\end{document}
